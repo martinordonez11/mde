@@ -339,6 +339,18 @@
     .contact-layout{grid-template-columns:1fr;gap:56px;}
     .hero-stats{gap:36px;}
   }
+
+body::after{
+  content:'';
+  position:fixed;
+  top:0;
+  left:32px;
+  width:2px;
+  height:100vh;
+  background:red;
+  z-index:9999;
+  pointer-events:none;
+}
 </style>
 </head>
 
