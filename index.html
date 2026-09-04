@@ -296,12 +296,17 @@
   
 .header-flags{
   display:flex;
-  gap:8px;
+  gap:10px;
   align-items:center;
 }
 .header-flags img{
-  border-radius:2px;
-  opacity:0.85;
+  border-radius:0;
+  display:block;
+  width:26px;
+  height:18px;
+  object-fit:cover;
+  border:1px solid rgba(244,241,233,0.15);
+  opacity:0.9;
   transition:opacity .2s ease;
 }
 .header-flags img:hover{opacity:1;}
