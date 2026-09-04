@@ -283,6 +283,17 @@
   to{transform:rotate(360deg);}
 }
 
+.hero-logo{
+  position:absolute;
+  top:150px;
+  right:32px;
+  width:100px;
+  height:100px;
+}
+@media (max-width:900px){
+  .hero-logo{display:none;}
+}
+  
 
   footer{
     position:relative;z-index:1;border-top:1px solid var(--line);padding:48px 0;
@@ -335,6 +346,7 @@
 <main>
   <section class="hero wrap">
     <h1>Marketing que se nota <em>antes</em> de decir una palabra.</h1>
+    <img src="mde-logo.png" alt="MDE Agency" class="spin-logo hero-logo">
     <p class="lede">Somos MDE Agency: diseñamos identidad, contenido y campañas para marcas que quieren dejar de pasar desapercibidas.</p>
     <div class="hero-actions">
       <a href="#proyectos" class="btn-primary">Ver proyectos</a>
