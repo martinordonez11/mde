@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDE Agency — Marketing con dirección</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#050b16;
+    --navy:#0a1830;
+    --navy-soft:#12203c;
+    --teal:#4fd6c4;
+    --gold:#e3b46a;
+    --cream:#f4f1e9;
+    --muted:#8b98ac;
+    --line:rgba(244,241,233,0.10);
+    --grad: linear-gradient(135deg, var(--gold) 0%, #cbb877 25%, var(--teal) 75%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy-deep);
+    color:var(--cream);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--teal);color:var(--navy-deep);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* Background waves, echoing the logo */
+  .bg-waves{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 900px 600px at 20% -10%, rgba(79,214,196,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 20%, rgba(227,180,106,0.06), transparent 60%);
+  }
+  .bg-waves svg{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.35;}
+
+  /* Nav */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,11,22,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1180px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{height:34px;width:34px;object-fit:contain;}
+  .brand span{font-family:'Fraunces',serif;font-size:19px;letter-spacing:0.01em;}
+  .nav-links{display:flex;gap:36px;font-size:14.5px;color:var(--muted);}
+  .nav-links a:hover{color:var(--cream);}
+  .nav-cta{
+    font-size:14px;padding:9px 20px;border:1px solid var(--teal);border-radius:2px;
+    color:var(--teal);transition:all .2s ease;
+  }
+  .nav-cta:hover{background:var(--teal);color:var(--navy-deep);}
+  .menu-toggle{display:none;background:none;border:none;color:var(--cream);font-size:22px;cursor:pointer;}
+
+  /* Hero */
+  .hero{
+    position:relative;z-index:1;
+    padding:150px 0 40px;
+  }
+  .hero .eyebrow-mark{
+    width:20px;height:20px;margin-bottom:28px;
+  }
+  .hero h1{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    font-size:clamp(42px,6.2vw,84px);
+    line-height:1.04;
+    letter-spacing:-0.01em;
+    max-width:820px;
+  }
+  .hero h1 em{font-style:italic;font-weight:300;color:var(--teal);}
+  .hero .lede{
+    margin-top:28px;
+    max-width:480px;
+    font-size:17.5px;
+    color:var(--muted);
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cream);color:var(--navy-deep);
+    padding:15px 30px;border-radius:2px;font-size:14.5px;font-weight:500;
+    transition:transform .2s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    padding:15px 26px;border:1px solid var(--line);border-radius:2px;
+    font-size:14.5px;color:var(--cream);transition:border-color .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--teal);}
+
+  .hero-stats{
+    display:flex;gap:56px;margin-top:96px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:20px;
+  }
+  .hero-stats div{max-width:180px;}
+  .hero-stats strong{
+    display:block;font-family:'Fraunces',serif;font-size:30px;font-weight:400;color:var(--teal);
+  }
+  .hero-stats p{font-size:13.5px;color:var(--muted);margin-top:4px;}
+
+  /* Section headers */
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:56px;flex-wrap:wrap;gap:20px;
+  }
+  .section-head h2{
+    font-family:'Fraunces',serif;font-weight:400;
+    font-size:clamp(30px,3.6vw,44px);max-width:520px;line-height:1.15;
+  }
+  .section-head p{color:var(--muted);max-width:340px;font-size:15px;}
+
+  section{position:relative;z-index:1;padding:100px 0;}
+  .divider{height:1px;background:var(--line);max-width:1180px;margin:0 auto;}
+
+  /* Servicios */
+  .services{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--navy-deep);padding:40px 32px;
+  }
+  .service-card .num{
+    font-family:'Fraunces',serif;font-style:italic;color:var(--teal);font-size:14px;
+  }
+  .service-card h3{
+    font-family:'Fraunces',serif;font-weight:400;font-size:24px;margin-top:18px;
+  }
+  .service-card p{color:var(--muted);font-size:14.5px;margin-top:12px;}
+
+  /* Portafolio */
+  .portfolio-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:22px;
+  }
+  .proj{
+    position:relative;border-radius:2px;overflow:hidden;
+    border:1px solid var(--line);
+    cursor:pointer;
+  }
+  .proj-thumb{
+    aspect-ratio:4/5;width:100%;position:relative;overflow:hidden;
+  }
+  .proj-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .proj:hover .proj-thumb img{transform:scale(1.04);}
+  .proj-thumb .ph{
+    width:100%;height:100%;display:flex;align-items:flex-end;padding:22px;
+    font-family:'Fraunces',serif;font-size:15px;color:rgba(244,241,233,0.5);
+  }
+  .proj-info{padding:18px 4px 0;}
+  .proj-info .cat{font-size:12.5px;color:var(--teal);}
+  .proj-info h3{font-family:'Fraunces',serif;font-weight:400;font-size:19px;margin-top:6px;}
+
+  .proj.span-3{grid-column:span 3;}
+  .proj.span-2{grid-column:span 2;}
+  .proj.span-4{grid-column:span 4;}
+
+  @media (max-width:900px){
+    .proj.span-3,.proj.span-2,.proj.span-4{grid-column:span 6;}
+    .services{grid-template-columns:1fr;}
+  }
+
+  /* Contacto */
+  .contact-layout{
+    display:grid;grid-template-columns:1fr 1.1fr;gap:80px;
+  }
+  .contact-layout h2{
+    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(30px,3.6vw,46px);line-height:1.15;
+  }
+  .contact-layout .lede{color:var(--muted);margin-top:20px;max-width:380px;font-size:15.5px;}
+  .contact-detail{margin-top:44px;display:flex;flex-direction:column;gap:14px;}
+  .contact-detail a{font-size:15px;border-bottom:1px solid var(--line);padding-bottom:14px;display:block;transition:color .2s ease;}
+  .contact-detail a:hover{color:var(--teal);}
+
+  form{display:flex;flex-direction:column;gap:22px;}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field label{font-size:13px;color:var(--muted);}
+  .field input,.field select,.field textarea{
+    background:transparent;border:none;border-bottom:1px solid var(--line);
+    color:var(--cream);font-family:'Inter',sans-serif;font-size:15.5px;
+    padding:10px 2px;outline:none;transition:border-color .2s ease;
+  }
+  .field input::placeholder,.field textarea::placeholder{color:#4d586b;}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);}
+  .field select{color:var(--cream);}
+  .field select option{background:var(--navy);}
+  textarea{resize:vertical;min-height:90px;}
+  .submit-btn{
+    margin-top:10px;align-self:flex-start;
+    background:var(--grad);color:var(--navy-deep);font-weight:600;
+    padding:15px 34px;border:none;border-radius:2px;font-size:14.5px;font-family:'Inter',sans-serif;
+    cursor:pointer;transition:opacity .2s ease;
+  }
+  .submit-btn:hover{opacity:0.88;}
+  .form-note{font-size:13px;color:var(--muted);margin-top:2px;}
+  .form-success{display:none;color:var(--teal);font-size:14.5px;margin-top:14px;}
+
+/* Carrusel de logos */
+.logos-section{padding:70px 0;position:relative;z-index:1;}
+.logos-label{
+  text-align:center;font-size:13px;letter-spacing:0.04em;color:var(--muted);
+  margin-bottom:36px;
+}
+.logos-marquee{
+  overflow:hidden;position:relative;width:100%;display:flex;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+.logos-track{
+  display:flex;align-items:center;gap:72px;flex:0 0 auto;
+  animation:scroll-logos 28s linear infinite;
+  padding-right:72px;
+}
+.logos-marquee:hover .logos-track{animation-play-state:paused;}
+@keyframes scroll-logos{
+  from{transform:translateX(0);}
+  to{transform:translateX(-100%);}
+}
+.logo-item{
+  flex:0 0 auto;
+  min-width:130px;height:80px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:16px;color:rgba(244,241,233,0.55);
+}
+.logo-item img{
+  max-height:64px;width:auto;
+  filter:brightness(0) invert(1);
+  opacity:0.6;
+  transition:opacity .2s ease;
+}
+.logo-item img:hover{opacity:0.95;}
+
+
+/* Carrusel dentro de cada proyecto */
+.proj-carousel{position:relative;}
+.carousel-track{
+  display:flex;overflow-x:auto;scroll-snap-type:x mandatory;
+  height:100%;scrollbar-width:none;
+}
+.carousel-track::-webkit-scrollbar{display:none;}
+.carousel-slide{flex:0 0 100%;scroll-snap-align:start;height:100%;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(5,11,22,0.65);border:none;color:var(--cream);
+  width:34px;height:34px;border-radius:50%;font-size:19px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s ease;z-index:2;
+}
+.proj-carousel:hover .carousel-btn{opacity:1;}
+.carousel-btn.prev{left:10px;}
+.carousel-btn.next{right:10px;}
+.carousel-dots{
+  position:absolute;bottom:10px;left:0;right:0;
+  display:flex;justify-content:center;gap:6px;z-index:2;
+}
+.carousel-dots span{
+  width:5px;height:5px;border-radius:50%;background:rgba(244,241,233,0.4);
+}
+
+
+/* Logo girando */
+.spin-logo{
+  animation: spin-logo 8s linear infinite;
+}
+@keyframes spin-logo{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+
+  footer{
+    position:relative;z-index:1;border-top:1px solid var(--line);padding:48px 0;
+  }
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  .footer-row .brand span{font-size:16px;}
+  .footer-links{display:flex;gap:28px;font-size:14px;color:var(--muted);}
+  .footer-links a:hover{color:var(--cream);}
+
+  @media (max-width:760px){
+    nav{padding:16px 20px;}
+    .nav-links{display:none;}
+    .wrap{padding:0 20px;}
+    .hero{padding:110px 0 70px;}
+    .contact-layout{grid-template-columns:1fr;gap:56px;}
+    .hero-stats{gap:36px;}
+  }
+</style>
+</head>
+
+
+
+
+<body>
+
+<div class="bg-waves">
+  <svg viewBox="0 0 1200 1400" preserveAspectRatio="none">
+    <path d="M0,120 C300,60 500,180 800,110 S1200,140 1200,140" stroke="#4fd6c4" stroke-width="1" fill="none" opacity="0.25"/>
+    <path d="M0,260 C320,190 520,320 820,240 S1200,270 1200,270" stroke="#e3b46a" stroke-width="1" fill="none" opacity="0.18"/>
+    <path d="M0,700 C280,640 560,760 860,690 S1200,720 1200,720" stroke="#4fd6c4" stroke-width="1" fill="none" opacity="0.15"/>
+    <path d="M0,1000 C300,940 560,1060 880,990 S1200,1020 1200,1020" stroke="#e3b46a" stroke-width="1" fill="none" opacity="0.12"/>
+  </svg>
+</div>
+
+<header>
+  <nav>
+    <a href="#" class="brand">
+      <img src="mde-logo.png" alt="MDE Agency" class="spin-logo">
+      <span>MDE Agency</span>
+    </a>
+    <div class="nav-links">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <a href="#contacto" class="nav-cta">Hablemos</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1>Marketing que se nota <em>antes</em> de decir una palabra.</h1>
+    <p class="lede">Somos MDE Agency: diseñamos identidad, contenido y campañas para marcas que quieren dejar de pasar desapercibidas.</p>
+    <div class="hero-actions">
+      <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+      <a href="#contacto" class="btn-ghost">Cotizar un proyecto</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <strong class="stat-num" data-target="20" data-prefix="+">0</strong>
+        <p>proyectos entregados</p>
+      </div>
+      <div>
+        <strong class="stat-num" data-target="6">0</strong>
+        <p>industrias distintas</p>
+      </div>
+      <div>
+        <strong class="stat-num" data-target="3" data-suffix=" años">0</strong>
+        <p>construyendo marcas</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+<section id="servicios" class="wrap" style="padding-top:50px;"></section>
+
+  <section id="servicios" class="wrap">
+    <div class="section-head">
+      <h2>Todo lo que una marca necesita para verse y sonar como debe.</h2>
+      <p>De la identidad a la ejecución, sin soltarte la mano en el camino.</p>
+    </div>
+    <div class="services">
+      <div class="service-card">
+        <span class="num">Identidad</span>
+        <h3>Branding</h3>
+        <p>Logo, paleta, tono de voz y lineamientos visuales que sostienen todo lo demás.</p>
+      </div>
+      <div class="service-card">
+        <span class="num">Presencia</span>
+        <h3>Redes sociales</h3>
+        <p>Contenido, calendarios y comunidad para marcas que quieren crecer con intención.</p>
+      </div>
+      <div class="service-card">
+        <span class="num">Alcance</span>
+        <h3>Campañas pagadas</h3>
+        <p>Meta, Google y TikTok Ads con seguimiento real de lo que sí funciona.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+<section id="proyectos" class="wrap" style="padding-top:60px;"></section>
+
+  <section id="proyectos" class="wrap">
+    <div class="section-head">
+      <h2>Proyectos recientes</h2>
+      <p>Una muestra del trabajo. Puedes ver más en el Instagram de la agencia.</p>
+    </div>
+
+    <!-- ============================================================
+         PARA AGREGAR O CAMBIAR PROYECTOS:
+         1) Sube tus imágenes a la carpeta /assets (junto a este archivo)
+         2) Edita la lista de abajo (id="portfolio-grid"): duplica un
+            bloque <div class="proj ..."> y cambia imagen, categoría y título.
+         3) La clase "span-3" (mitad), "span-2" (un tercio) o "span-4"
+            (dos tercios) controla el tamaño de cada tarjeta en la grilla.
+         ============================================================ -->
+    <div class="portfolio-grid" id="portfolio-grid">
+
+      <div class="proj span-4">
+        <div class="proj-thumb proj-carousel">
+          <div class="carousel-track">
+            <div class="carousel-slide"><img src="proyecto1-1.jpg" alt="Proyecto 1 - imagen 1"></div>
+            <div class="carousel-slide"><img src="proyecto1-2.jpg" alt="Proyecto 1 - imagen 2"></div>
+            <div class="carousel-slide"><img src="proyecto1-3.jpg" alt="Proyecto 1 - imagen 3"></div>
+          </div>
+          <button class="carousel-btn prev">‹</button>
+          <button class="carousel-btn next">›</button>
+        </div>
+        <div class="proj-info">
+          <p class="cat">Identidad de marca · Redes sociales</p>
+          <h3>PRANA Mallas y Persianas</h3>
+        </div>
+      </div>
+
+      <div class="proj span-2">
+        <div class="proj-thumb"style="background:#0e1a30;padding:24px;box-sizing:border-box;">
+          <img src= "proyecto2-1.png" alt="TONEL Licorerías" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div class="proj-info">
+          <p class="cat">Branding</p>
+          <h3>TONEL Licorerías</h3>
+        </div>
+      </div>
+<!--
+      <div class="proj span-2">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#2a2418,#0a1830);">
+          <div class="ph">Sube tu imagen aquí</div>
+        </div>
+        <div class="proj-info">
+          <p class="cat">Contenido</p>
+          <h3>Nombre del proyecto 3</h3>
+        </div>
+      </div>
+
+      <div class="proj span-4">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#0f2a2a,#0a1830);">
+          <div class="ph">Sube tu imagen aquí</div>
+        </div>
+        <div class="proj-info">
+          <p class="cat">Branding</p>
+          <h3>Nombre del proyecto 4</h3>
+        </div>
+      </div>
+
+      <div class="proj span-3">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1f38,#0a1830);">
+          <div class="ph">Sube tu imagen aquí</div>
+        </div>
+        <div class="proj-info">
+          <p class="cat">Redes sociales</p>
+          <h3>Nombre del proyecto 5</h3>
+        </div>
+      </div>
+
+      <div class="proj span-3">
+        <div class="proj-thumb" style="background:linear-gradient(135deg,#2c1e2c,#0a1830);">
+          <div class="ph">Sube tu imagen aquí</div>
+        </div>
+        <div class="proj-info">
+          <p class="cat">Campaña</p>
+          <h3>Nombre del proyecto 6</h3>
+        </div>
+      </div>
+    -->
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="logos-section">
+  <div class="wrap">
+    <p class="logos-label">Marcas con las que hemos trabajado</p>
+  </div>
+  <div class="logos-marquee">
+    <div class="logos-track">
+      <div class="logo-item"><img src="logo-cliente1.png" alt="Cristo Rey"></div>
+      <div class="logo-item"><img src="logo-cliente2.png" alt="Tejiendo Sonrisas"></div>
+      <div class="logo-item"><img src="logo-cliente3.png" alt="TONEL Licorerías"></div>
+      <div class="logo-item"><img src="logo-cliente4.png" alt="Cristalizados Medellín"></div>
+      <div class="logo-item"><img src="logo-cliente5.png" alt="PRANA Mallas y Persianas"></div>
+      <div class="logo-item"><img src="logo-cliente6.png" alt="ANDI"></div>
+      <div class="logo-item"><img src="logo-cliente7.png" alt="Empoderate"></div>
+
+    </div>
+    <div class="logos-track" aria-hidden="true">
+      <div class="logo-item"><img src="logo-cliente1.png" alt="Cristo Rey"></div>
+      <div class="logo-item"><img src="logo-cliente2.png" alt="Tejiendo Sonrisas"></div>
+      <div class="logo-item"><img src="logo-cliente3.png" alt="TONEL Licorerías"></div>
+      <div class="logo-item"><img src="logo-cliente4.png" alt="Cristalizados Medellín"></div>
+      <div class="logo-item"><img src="logo-cliente5.png" alt="PRANA Mallas y Persianas"></div>
+      <div class="logo-item"><img src="logo-cliente6.png" alt="ANDI"></div>
+      <div class="logo-item"><img src="logo-cliente7.png" alt="Empoderate"></div>
+
+    </div>
+  </div>
+</section>
+
+  <div class="divider"></div>
+
+  <section id="contacto" class="wrap">
+
+
+
+<section id="contacto" class="wrap" style="padding-top:40px;"></section>
+
+  <section id="contacto" class="wrap">
+    <div class="contact-layout">
+      <div>
+        <h2>Cuéntanos qué estás construyendo.</h2>
+        <p class="lede">Respondemos en menos de 24 horas con una idea concreta de cómo podemos ayudar, no un formulario más para llenar.</p>
+        <div class="contact-detail">
+          <a href="mailto:hola@mdeagency.com">hola@mdeagency.com</a>
+          <a href="https://www.instagram.com/wearemde/" target="_blank" rel="noopener">Instagram — @wearemde </a>
+        </div>
+      </div>
+
+      <form id="contact-form">
+        <div class="field">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="¿Cómo te llamas?" required>
+        </div>
+        <div class="field">
+          <label for="email">Correo</label>
+          <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+        </div>
+        <div class="field">
+          <label for="service">Servicio de interés</label>
+          <select id="service" name="service">
+            <option value="">Selecciona una opción</option>
+            <option value="branding">Branding</option>
+            <option value="redes">Redes sociales</option>
+            <option value="campanas">Campañas pagadas</option>
+            <option value="otro">Otro / no estoy seguro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" placeholder="Cuéntanos brevemente sobre tu marca y lo que necesitas"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Enviar mensaje</button>
+        <p class="form-note">Al enviar, se abrirá tu cliente de correo con el mensaje listo para confirmar.</p>
+        <p class="form-success" id="form-success">Gracias — tu mensaje está listo para enviarse desde tu correo.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <a href="#" class="brand">
+      <img src="mde-logo.png" alt="MDE Agency" style="height:26px;width:26px;">
+      <span>MDE Agency</span>
+    </a>
+    <div class="footer-links">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="https://www.instagram.com/wearemde/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p style="font-size:13px;color:var(--muted);">© 2026 MDE Agency</p>
+  </div>
+</footer>
+
+<script>
+  // El formulario abre el correo del usuario con los datos ya escritos.
+  // Para conectarlo a un servicio real (ej. formsubmit.co, o tu propio backend),
+  // reemplaza esta función por el envío correspondiente.
+  document.getElementById('contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value;
+
+    const subject = encodeURIComponent('Nuevo contacto desde el landing — ' + name);
+    const body = encodeURIComponent(
+      'Nombre: ' + name + '\n' +
+      'Correo: ' + email + '\n' +
+      'Servicio de interés: ' + (service || 'No especificado') + '\n\n' +
+      'Mensaje:\n' + message
+    );
+    window.location.href = 'mailto:hola@mdeagency.com?subject=' + subject + '&body=' + body;
+
+    document.getElementById('form-success').style.display = 'block';
+  });
+</script>
+
+<script>
+  function animateCount(el){
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 3200;
+    let startTime = null;
+
+    function step(timestamp){
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = prefix + current + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = prefix + target + suffix;
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  const statEls = document.querySelectorAll('.stat-num');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statEls.forEach(el => statsObserver.observe(el));
+</script>
+
+<script>
+  // Hace funcionar las flechas de cada carrusel de proyecto
+  document.querySelectorAll('.proj-carousel').forEach(function(carousel){
+    const track = carousel.querySelector('.carousel-track');
+    const prev = carousel.querySelector('.prev');
+    const next = carousel.querySelector('.next');
+    prev.addEventListener('click', function(){
+      track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' });
+    });
+    next.addEventListener('click', function(){
+      track.scrollBy({ left: track.clientWidth, behavior: 'smooth' });
+    });
+  });
+</script>
+
+
+
+
+</body>
+</html>
