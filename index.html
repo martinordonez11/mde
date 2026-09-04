@@ -294,7 +294,22 @@
   .hero-logo{display:none;}
 }
   
+.header-flags{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.header-flags img{
+  border-radius:2px;
+  opacity:0.85;
+  transition:opacity .2s ease;
+}
+.header-flags img:hover{opacity:1;}
+@media (max-width:760px){
+  .header-flags{display:none;}
+}
 
+  
   footer{
     position:relative;z-index:1;border-top:1px solid var(--line);padding:48px 0;
   }
@@ -338,6 +353,10 @@
       <a href="#proyectos">Proyectos</a>
       <a href="#servicios">Servicios</a>
       <a href="#contacto">Contacto</a>
+    </div>
+    <div class="header-flags">
+    <img src="https://flagcdn.com/24x18/pe.png" alt="Perú" width="24" height="18">
+    <img src="https://flagcdn.com/24x18/co.png" alt="Colombia" width="24" height="18">
     </div>
     <a href="#contacto" class="nav-cta">Hablemos</a>
   </nav>
@@ -570,6 +589,8 @@
   </section>
 </main>
 
+
+  
 <footer>
   <div class="wrap footer-row">
     <a href="#" class="brand">
