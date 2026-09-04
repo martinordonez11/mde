@@ -54,9 +54,20 @@
     border-bottom:1px solid var(--line);
   }
   nav{
-    display:flex;align-items:center;justify-content:space-between;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
     padding:18px 32px;max-width:1180px;margin:0 auto;
   }
+  .brand{justify-self:start;}
+  .nav-links{justify-self:center;}
+  .nav-right{
+    justify-self:end;
+    display:flex;
+    align-items:center;
+    gap:20px;
+  }
+  
   .brand{display:flex;align-items:center;gap:10px;}
   .brand img{height:34px;width:34px;object-fit:contain;}
   .brand span{font-family:'Fraunces',serif;font-size:19px;letter-spacing:0.01em;}
@@ -348,7 +359,7 @@
 <header>
   <nav>
     <a href="#" class="brand">
-      <img src="mde-logo.png" alt="MDE Agency" class="spin-logo">
+      <img src="mde-logo.png" alt="MDE Agency">
       <span>MDE Agency</span>
     </a>
     <div class="nav-links">
@@ -356,11 +367,13 @@
       <a href="#servicios">Servicios</a>
       <a href="#contacto">Contacto</a>
     </div>
-    <div class="header-flags">
-    <span class="fi fi-pe"></span>
-    <span class="fi fi-co"></span>
+    <div class="nav-right">
+      <div class="header-flags">
+        <span class="fi fi-pe"></span>
+        <span class="fi fi-co"></span>
+      </div>
+      <a href="#contacto" class="nav-cta">Hablemos</a>
     </div>
-    <a href="#contacto" class="nav-cta">Hablemos</a>
   </nav>
 </header>
 
