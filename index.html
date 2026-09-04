@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.15.0/css/flag-icons.min.css">
 <style>
   :root{
     --navy-deep:#050b16;
@@ -299,17 +300,13 @@
   gap:10px;
   align-items:center;
 }
-.header-flags img{
-  border-radius:0;
-  display:block;
+.header-flags .fi{
+  border-radius:2px;
   width:26px;
-  height:18px;
-  object-fit:cover;
-  border:1px solid rgba(244,241,233,0.15);
   opacity:0.9;
   transition:opacity .2s ease;
 }
-.header-flags img:hover{opacity:1;}
+.header-flags .fi:hover{opacity:1;}
 @media (max-width:760px){
   .header-flags{display:none;}
 }
@@ -360,8 +357,8 @@
       <a href="#contacto">Contacto</a>
     </div>
     <div class="header-flags">
-    <img src="https://flagcdn.com/24x18/pe.png" alt="Perú" width="24" height="18">
-    <img src="https://flagcdn.com/24x18/co.png" alt="Colombia" width="24" height="18">
+    <span class="fi fi-pe"></span>
+    <span class="fi fi-co"></span>
     </div>
     <a href="#contacto" class="nav-cta">Hablemos</a>
   </nav>
